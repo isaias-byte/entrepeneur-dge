@@ -46,7 +46,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">Iniciar Sesión</h1>
                                     </div>
                                     <div class="text-center">
-                                          Bienvenido 👋
+                                        Bienvenido 👋
                                     </div>
                                     <hr>
                                     <form class="user" action="{{ route('login') }}" method="POST">

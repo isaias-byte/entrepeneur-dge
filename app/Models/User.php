@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'rol_id',
     ];
 
     /**
@@ -58,4 +58,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
+    public function scopeRolName($query,$rol){
+        $rol_id = Rol::where('rol',$rol)->first()->id;
+        return $query->where('rol_id',$rol_id);
+    }
+
 }
