@@ -17,16 +17,14 @@
         </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link" href="#" 
-                aria-expanded="true">
+            <a class="nav-link" href="#" aria-expanded="true">
                 {{-- <i class="far fa-fw fa-window-maximize"></i> --}}
                 <i class="fas fa-project-diagram"></i>
                 <span>Mi Proyecto</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('estudiante.create') }}" 
-                aria-expanded="true">
+            <a class="nav-link" href="{{ route('estudiante.create') }}" aria-expanded="true">
                 {{-- <i class="far fa-fw fa-window-maximize"></i> --}}
                 <i class="far fa-user"></i>
                 <span>Mi Perfil</span>
@@ -37,8 +35,8 @@
             Features
         </div> --}}
         <li class="nav-item">
-            <a class="nav-link" href="#" data-target="#collapseBootstrap"
-                aria-expanded="true" aria-controls="collapseBootstrap">
+            <a class="nav-link" href="#" data-target="#collapseBootstrap" aria-expanded="true"
+                aria-controls="collapseBootstrap">
                 <i class="far fa-fw fa-window-maximize"></i>
                 <span>Material Disponible</span>
             </a>
@@ -135,7 +133,7 @@
         <i class="fa fa-bars"></i>
     </button>
     <ul class="navbar-nav ml-auto">
-    
+
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -150,7 +148,7 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <i class="fas fa-search fa-sm"></i>
-                
+
                             </button>
                         </div>
                     </div>
@@ -175,7 +173,8 @@
                 </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" onclick="event.preventDefault(); this.closest('form').submit();">
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"
+                        onclick="event.preventDefault(); this.closest('form').submit();">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Cerrar Sesión
                     </a>
@@ -186,7 +185,118 @@
 @endsection
 
 @section('content')
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- Form Basic -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">User</h6>
+                </div>
+                <div class="card-body">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <!-- General Element -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Registro</h6>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('estudiante.store') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
+                                value="{{ old('nombre') ?? ($estudiante->nombre ?? '') }}">
+                            @error('nombre')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Apellido Paterno</label>
+                            <input type="text" id="apellido_paterno" name="apellido_paterno"
+                                class="form-control @error('apellido_paterno') is-invalid @enderror"
+                                value="{{ old('apellido_paterno') ?? ($estudiante->apellido_paterno ?? '') }}">
+                            @error('apellido_paterno')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Apellido Materno</label>
+                            <input type="text" id="apellido_materno" name="apellido_materno"
+                                class="form-control @error('apellido_materno') is-invalid @enderror"
+                                value="{{ old('apellido_materno') ?? ($estudiante->apellido_materno ?? '') }}">
+                            @error('apellido_materno')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group" id="simple-date1">
+                            <label for="publication">Fecha de Nacimiento</label>
+                            <div class="input-group date">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') ?? $estudiante->fecha_nacimiento ?? '' }}" placeholder="dd/mm/yyyy">
+                            </div>
+                            @error('fecha_nacimiento')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Sexo</label>
+                            <select id="sexo" name="sexo"
+                            class="form-control mb-3 @error('sexo') is-invalid @enderror"
+                            value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}">
+                                <option>Masculino</option>
+                                <option>Femenino</option>
+                            </select>
+                            {{-- <input type="text" id="sexo" name="sexo"
+                                class="form-control @error('sexo') is-invalid @enderror"
+                                value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}"> --}}
+                            @error('sexo')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Codigo</label>
+                            <input type="text" id="codigo" name="codigo"
+                                class="form-control @error('codigo') is-invalid @enderror"
+                                value="{{ old('codigo') ?? ($estudiante->codigo ?? '') }}">
+                            @error('codigo')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">NRC</label>
+                            <input type="text" id="nrc" name="nrc"
+                                class="form-control @error('nrc') is-invalid @enderror"
+                                value="{{ old('nrc') ?? ($estudiante->nrc ?? '') }}">
+                            @error('nrc')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-icon-split">
+                            <span class="icon text-white-50">
+                              <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Guardar</span>
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
 @endsection
-
-

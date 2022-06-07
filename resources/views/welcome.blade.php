@@ -24,8 +24,6 @@
 
 @section('content')
     <div class="col-12 text-center d-flex justify-content-center row">
-
-
         <h1 class="text-center">Emprendimiento DGE</h1>
         <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium facere itaque ea
             molestiae? Neque voluptatum eaque incidunt nobis eos blanditiis explicabo ad magnam provident suscipit.
@@ -38,16 +36,16 @@
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ asset('img/inicio-1.jpeg') }}" alt="Notaria11 y 108 Imagen 1">
+                    <img class="d-block w-100" src="{{ asset('img/inicio-1.jpeg') }}" alt="CUCEA">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('img/inicio-2.jpeg') }}" alt="Notaria11 y 108 Imagen 2">
+                    <img class="d-block w-100" src="{{ asset('img/inicio-2.jpeg') }}" alt="CUCEA">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('img/inicio-3.jpg') }}" alt="Notaria11 y 108 Imagen 3">
+                    <img class="d-block w-100" src="{{ asset('img/inicio-3.jpg') }}" alt="CUCEA">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="{{ asset('img/inicio-4.jpg') }}" alt="Notaria11 y 108 Imagen 3">
+                    <img class="d-block w-100" src="{{ asset('img/inicio-4.jpg') }}" alt="CUCEA">
                 </div>
 
             </div>
