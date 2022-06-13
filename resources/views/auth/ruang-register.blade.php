@@ -25,7 +25,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('img/logo/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
-    <title>RuangAdmin - Register</title>
+    <title>Registro</title>
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/ruang-admin.min.css') }}" rel="stylesheet">
@@ -50,33 +50,47 @@
                                           <span aria-hidden="true">×</span>
                                         </button> --}}
                                         <h6><i class="fas fa-exclamation-triangle"></i><b> ¡Importante!</b></h6>
-                                        Capture su nombre empezando por apellidos y utilizando mayúsuclas y minúsculas; por ejemplo: Pérez Fernández Karla
+                                        Capture su nombre tal como aparece en su acta de nacimiento.
                                     </div>
                                     <form action="{{ route('register') }}" method="POST">
                                         @csrf
                                         <div class="form-group">
-                                            <label>Nombre</label>
+                                            <label for="name">Nombre</label>
                                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Nombre">
                                             @error('name')
                                                 <div class="text-danger"> {{ $message }} </div>
                                             @enderror
-                                        </div>                                        
+                                        </div>
                                         <div class="form-group">
-                                            <label>Email</label>
+                                            <label for="apellido_paterno">Apellido Paterno</label>
+                                            <input type="text" class="form-control @error('apellido_paterno') is-invalid @enderror" id="apellido_paterno" name="apellido_paterno" value="{{ old('apellido_paterno') }}" placeholder="Apellido Paterno">
+                                            @error('apellido_paterno')
+                                                <div class="text-danger"> {{ $message }} </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="apellido_materno">Apellido Materno</label>
+                                            <input type="text" class="form-control @error('apellido_materno') is-invalid @enderror" id="apellido_materno" name="apellido_materno" value="{{ old('apellido_materno') }}" placeholder="Apellido Materno">
+                                            @error('apellido_materno')
+                                                <div class="text-danger"> {{ $message }} </div>
+                                            @enderror
+                                        </div>                                      
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
                                             <input type="email" class="form-control @error('email') is-invalid @enderror" aria-describedby="emailHelp" placeholder="Email" id="email" name="email" value="{{ old('email') }}">
                                             @error('email')
                                                 <div class="text-danger"> {{ $message }} </div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label>Contraseña</label>
+                                            <label for="password">Contraseña</label>
                                             <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Contraseña" id="password" name="password">
                                             @error('password')
                                                 <div class="text-danger"> {{ $message }} </div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label>Confirmar Contraseña</label>
+                                            <label for="password_confirmation">Confirmar Contraseña</label>
                                             <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                                             id="password_confirmation" name="password_confirmation" placeholder="Confirmar contraseña">
                                                 @error('password_confirmation')
@@ -86,13 +100,13 @@
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
                                         </div>
-                                        <hr>
+                                        {{-- <hr>
                                         <a href="#" class="btn btn-google btn-block">
                                             <i class="fab fa-google fa-fw"></i> Register with Google
                                         </a>
                                         <a href="#" class="btn btn-facebook btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                        </a>
+                                        </a> --}}
                                     </form>
                                     <hr>
                                     <div class="text-center">

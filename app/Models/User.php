@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password', 'rol_id',
+        'rol_id', 'name', 'apellido_paterno', 'apellido_materno', 'email', 'password',
     ];
 
     /**
@@ -67,6 +67,11 @@ class User extends Authenticatable
     public function scopeRolName($query,$rol){
         $rol_id = Rol::where('rol',$rol)->first()->id;
         return $query->where('rol_id',$rol_id);
+    }
+
+    public function estudiante()
+    {
+        return $this->hasOne(Estudiante::class);
     }
 
 }

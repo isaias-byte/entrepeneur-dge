@@ -11,7 +11,7 @@
         <hr class="sidebar-divider my-0">
         <li class="nav-item active">
             <a class="nav-link" href="#">
-                {{-- <i class="fas fa-fw fa-tachometer-alt"></i> --}}
+              
                 <i class="fas fa-home"></i>
                 <span>Inicio</span></a>
         </li>
@@ -31,41 +31,21 @@
             </a>
         </li>
         <hr class="sidebar-divider">
-        {{-- <div class="sidebar-heading">
-            Features
-        </div> --}}
+        
         <li class="nav-item">
             <a class="nav-link" href="#" data-target="#collapseBootstrap" aria-expanded="true"
                 aria-controls="collapseBootstrap">
                 <i class="far fa-fw fa-window-maximize"></i>
                 <span>Material Disponible</span>
             </a>
-            {{-- <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Bootstrap UI</h6>
-                    <a class="collapse-item" href="alerts.html">Alerts</a>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                    <a class="collapse-item" href="modals.html">Modals</a>
-                    <a class="collapse-item" href="popovers.html">Popovers</a>
-                    <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
-                </div>
-            </div>
-        </li> --}}
+            
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-target="#collapseForm" aria-expanded="true"
                 aria-controls="collapseForm">
                 <i class="fab fa-fw fa-wpforms"></i>
                 <span>Emprende CUCEA</span>
             </a>
-            {{-- <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Forms</h6>
-                    <a class="collapse-item" href="form_basics.html">Form Basics</a>
-                    <a class="collapse-item" href="form_advanceds.html">Form Advanceds</a>
-                </div>
-            </div> --}}
+            
         </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-target="#collapseTable" aria-expanded="true"
@@ -73,13 +53,7 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Proyectos Antiguos</span>
             </a>
-            {{-- <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Tables</h6>
-                    <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-                    <a class="collapse-item" href="datatables.html">DataTables</a>
-                </div>
-            </div> --}}
+            
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
@@ -95,9 +69,7 @@
             </a>
         </li>
         <hr class="sidebar-divider">
-        {{-- <div class="sidebar-heading">
-            Examples
-        </div> --}}
+       
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
                 aria-controls="collapsePage">
@@ -115,12 +87,7 @@
                 </div>
             </div>
         </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span>
-            </a>
-        </li> --}}
+        
         <hr class="sidebar-divider">
         <div class="version" id="version-ruangadmin">Version 1.1</div>
     </ul>
@@ -159,13 +126,8 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="{{$estudiante->user->profile_photo_path == null ? \App\Models\User::find($estudiante->user->id)->profile_photo_url : asset($estudiante->profile_photo_path)}}" style="max-width: 60px">
-                <div class="text-center">
-
-                    <h5 class="ml-2 d-none d-lg-inline text-white">{{auth()->user()->name}}</h4>
-                    <br>
-                    <span class="ml-2 d-none d-lg-inline text-white small">{{auth()->user()->rol->rol}}</span>
-                </div>
+                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                <span class="ml-2 d-none d-lg-inline text-white small">User Test</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-leabelledby="userDropdown">
                 <div class="dropdown-item">
@@ -192,64 +154,29 @@
 @section('content')
     <div class="row">
         <div class="col-lg-4">
-            <!-- Form Basic -->
+        
             <div class="card mb-4">
-                {{-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">User</h6>
-                </div> --}}
+                </div>
                 <div class="card-body">
-                    <div class="d-flex align-items-center flex-column">
-                        <img class="img-fluid mt-3 mb-2" src="{{$estudiante->user->profile_photo_path == null ? \App\Models\User::find($estudiante->user->id)->profile_photo_url : asset($estudiante->profile_photo_path)}}" style="border-radius: 50%" width="110" height="110">
-                        <div class="user-info text-center">
-                            <h4>{{auth()->user()->name}}</h4>
-                            <p class="badge bg-primary text-uppercase text-white">{{auth()->user()->rol->rol}}</p>
-                        </div>
-                        {{-- <img wire:ignore="" style="border-radius: 50%" class="img-fluid mt-3 mb-2" src="https://ui-avatars.com/api/?name=P&amp;color=7F9CF5&amp;background=EBF4FF" alt="User avatar" width="110" height="110">
-                        <div class="user-info text-center">
-                            <h4>Pedro</h4>
-                            <p class="badge bg-primary text-uppercase">Alumno </p>
-                        </div> --}}
-                    </div>
-                    <div class="info-container">
-                        <div class="row mt-1">
-                            <div class="col-sm-8">
-                                <span class="fw-bolder me-25">Nombre: </span>
-                                <span>{{auth()->user()->name}} {{auth()->user()->apellido_paterno}} {{auth()->user()->apellido_materno}}</span>
-                            </div>
-                            <div class="col-sm-4 text-center"></div>
-                        </div>
-                        <div class="row d-flex justify-content-center mt-1">
-                            <div class="col-sm-8">
-                                <span class="fw-bolder me-25">Correo: </span>
-                                <span>{{auth()->user()->email}}</span>
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                                        </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
 
         <div class="col-lg-8">
-            <!-- General Element -->
+        
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Registro</h6>
                 </div>
                 <div class="card-body">
-                    @if (isset($estudiante->user_id))
-                    <form action="{{ route('estudiante.update', $estudiante) }}" method="post">
-                    @method('PATCH')
-                    
-                    @else
-                        
                     <form action="{{ route('estudiante.store') }}" method="post">
-                    @endif
                         @csrf
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input wire:model=".institucion_origen" type="text" id="nombre" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
+                            <input type="text" id="nombre" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
                                 value="{{ old('nombre') ?? ($estudiante->nombre ?? '') }}">
                             @error('nombre')
                                 <div class="text-danger"> {{ $message }} </div>
@@ -306,7 +233,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="nombre">Código</label>
+                            <label for="nombre">Codigo</label>
                             <input type="text" id="codigo" name="codigo"
                                 class="form-control @error('codigo') is-invalid @enderror"
                                 value="{{ old('codigo') ?? ($estudiante->codigo ?? '') }}">

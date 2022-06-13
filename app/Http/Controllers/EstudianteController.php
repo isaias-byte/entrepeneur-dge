@@ -25,8 +25,9 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        $estudiante = Auth::user();
+        $estudiante = Auth::user()->estudiante;
         return view('estudiante.estudiante-create', compact('estudiante'));
+        
     }
 
     /**
@@ -49,7 +50,7 @@ class EstudianteController extends Controller
 
         $request->merge([
             'apellido_materno' => $request->apellido_materno ?? '',
-            'saved' => 1,
+            'user_id' => Auth::id(),
         ]);
 
         Estudiante::create($request->all());
@@ -89,7 +90,24 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, Estudiante $estudiante)
     {
-        //
+
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:40'],
+            'apellido_paterno' => ['required', 'string', 'max:40'],
+            'apellido_materno' => ['max:40'],
+            'fecha_nacimiento' => ['required'],
+            'sexo' => ['required'],
+            'codigo' => ['required', 'string'],
+            'nrc' => ['required', 'string'],
+        ]);
+
+        $request->merge([
+            'apellido_materno' => $request->apellido_materno ?? '',
+            'user_id' => Auth::id(),
+        ]);
+
+        Estudiante::where('id', $estudiante->id)->update($request->except('_token', '_method'));
+        return redirect()->route('estudiante.create');
     }
 
     /**
