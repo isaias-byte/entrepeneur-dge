@@ -95,6 +95,17 @@
   <script src="{{ asset('vendor/clock-picker/clockpicker.js') }}"></script>
   <script src="{{ asset('js/ruang-admin.min.js') }}"></script>
   <script src="{{ asset('js/date-picker.js') }}"></script>
+  <script src="{{ asset('vendor/clock-picker/clockpicker.js') }}"></script>
+  <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+  <!-- Page level custom scripts -->
+  <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
 
 </body>
 

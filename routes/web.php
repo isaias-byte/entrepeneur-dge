@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministradorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
 
@@ -28,4 +29,8 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('estudiante', EstudianteController::class);
+//Rutas de administradores
+Route::get('administrador/estudiantes', [AdministradorController::class, 'adminEstudiantes'])->name('adminEstudiantes');
+
+//  Rutas de estudiantes
+Route::resource('estudiante', EstudianteController::class)->middleware('verified');
