@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministradorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\ProfesorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,17 @@ Route::middleware([
     })->name('dashboard');
 });
 
-//Rutas de administradores
-Route::get('administrador/estudiantes', [AdministradorController::class, 'adminEstudiantes'])->name('adminEstudiantes');
-
 //  Rutas de estudiantes
 Route::resource('estudiante', EstudianteController::class)->middleware('verified');
+
+//Rutas de administradores
+Route::get('administrador/estudiantes', [AdministradorController::class, 'adminEstudiantes'])->name('adminEstudiantes');
+Route::get('administrador/usuarios', [AdministradorController::class, 'adminUsuarios'])->name('adminUsuarios');
+
+//Rutas de profesores
+Route::get('profesor/create', [ProfesorController::class, 'create'])->name('profesorCreate');
+Route::post('profesor/store', [ProfesorController::class, 'store'])->name('profesorStore');
+Route::get('profesor/show/{id}', [ProfesorController::class, 'show'])->name('profesorShow');
+Route::get('profesor/edit/{id}', [ProfesorController::class, 'edit'])->name('profesorEdit');
+Route::patch('profesor/update/{id}', [ProfesorController::class, 'update'])->name('profesorUpdate');
+Route::delete('profesor/destroy/{id}', [ProfesorController::class, 'destroy'])->name('profesorDestroy');

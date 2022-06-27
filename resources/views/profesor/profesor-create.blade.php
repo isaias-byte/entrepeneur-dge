@@ -25,11 +25,11 @@
                             </div>
                         @else
                             <img class="img-fluid mt-3 mb-2"
-                                src="{{ $estudiante->user->profile_photo_path == null ? \App\Models\User::find($estudiante->user->id)->profile_photo_url : asset($estudiante->user->profile_photo_path) }}"
+                                src="{{ $profesor->user->profile_photo_path == null ? \App\Models\User::find($profesor->user->id)->profile_photo_url : asset($profesor->user->profile_photo_path) }}"
                                 style="border-radius: 50%" width="110" height="110">
                             <div class="user-info text-center">
-                                <h4>{{ $estudiante->user->name }}</h4>
-                                <p class="badge bg-primary text-uppercase text-white">{{ $estudiante->user->rol->rol }}</p>
+                                <h4>{{ $profesor->user->name }}</h4>
+                                <p class="badge bg-primary text-uppercase text-white">{{ $profesor->user->rol->rol }}</p>
                             </div>
                         @endif
                     </div>
@@ -50,19 +50,30 @@
                                 </div>
                                 <div class="col-sm-4 text-center"></div>
                             </div>
+                            <div class="row d-flex mt-1">
+                                <div class="col text-center">
+                                    <a href="{{ route('profesorShow', $profesor) }}" class="btn btn-info btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">Añadir NRC'S</span>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4 text-center"></div>
+                            </div>
                         @else
                             <div class="row mt-1">
                                 <div class="col-sm-8">
                                     <span class="fw-bolder me-25">Nombre: </span>
-                                    <span>{{ $estudiante->user->name }} {{ $estudiante->user->apellido_paterno }}
-                                        {{ $estudiante->user->apellido_materno }}</span>
+                                    <span>{{ $profesor->user->name }} {{ $profesor->user->apellido_paterno }}
+                                        {{ $profesor->user->apellido_materno }}</span>
                                 </div>
                                 <div class="col-sm-4 text-center"></div>
                             </div>
                             <div class="row d-flex justify-content-center mt-1">
                                 <div class="col-sm-8">
                                     <span class="fw-bolder me-25">Correo: </span>
-                                    <span>{{ $estudiante->user->email }}</span>
+                                    <span>{{ $profesor->user->email }}</span>
                                 </div>
                                 <div class="col-sm-4 text-center"></div>
                             </div>
@@ -72,7 +83,7 @@
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>
-                                        <span class="text">Eliminar Alumno</span>
+                                        <span class="text">Eliminar Profesor</span>
                                     </button>
                                 </div>
                                 <div class="col-sm-4 text-center"></div>
@@ -90,18 +101,18 @@
                     <h6 class="m-0 font-weight-bold text-primary">Registro</h6>
                 </div>
                 <div class="card-body">
-                    @if (isset($estudiante->user_id))
-                        <form action="{{ route('estudiante.update', $estudiante) }}" method="post">
+                    @if (isset($profesor->user_id))
+                        <form action="{{ route('profesorUpdate', $profesor) }}" method="post">
                             @method('PATCH')
                         @else
-                            <form action="{{ route('estudiante.store') }}" method="post">
+                            <form action="{{ route('profesorStore') }}" method="post">
                     @endif
                     @csrf
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input wire:model=".institucion_origen" type="text" id="nombre" name="nombre"
                             class="form-control @error('nombre') is-invalid @enderror"
-                            value="{{ old('nombre') ?? ($estudiante->nombre ?? '') }}">
+                            value="{{ old('nombre') ?? ($profesor->nombre ?? '') }}">
                         @error('nombre')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
@@ -111,7 +122,7 @@
                         <label for="nombre">Apellido Paterno</label>
                         <input type="text" id="apellido_paterno" name="apellido_paterno"
                             class="form-control @error('apellido_paterno') is-invalid @enderror"
-                            value="{{ old('apellido_paterno') ?? ($estudiante->apellido_paterno ?? '') }}">
+                            value="{{ old('apellido_paterno') ?? ($profesor->apellido_paterno ?? '') }}">
                         @error('apellido_paterno')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
@@ -121,7 +132,7 @@
                         <label for="nombre">Apellido Materno</label>
                         <input type="text" id="apellido_materno" name="apellido_materno"
                             class="form-control @error('apellido_materno') is-invalid @enderror"
-                            value="{{ old('apellido_materno') ?? ($estudiante->apellido_materno ?? '') }}">
+                            value="{{ old('apellido_materno') ?? ($profesor->apellido_materno ?? '') }}">
                         @error('apellido_materno')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
@@ -134,7 +145,7 @@
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                             </div>
                             <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
-                                value="{{ old('fecha_nacimiento') ?? ($estudiante->fecha_nacimiento ?? '') }}"
+                                value="{{ old('fecha_nacimiento') ?? ($profesor->fecha_nacimiento ?? '') }}"
                                 placeholder="dd/mm/yyyy">
                         </div>
                         @error('fecha_nacimiento')
@@ -145,13 +156,10 @@
                     <div class="form-group">
                         <label for="nombre">Sexo</label>
                         <select id="sexo" name="sexo" class="form-control mb-3 @error('sexo') is-invalid @enderror"
-                            value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}">
+                            value="{{ old('sexo') ?? ($profesor->sexo ?? '') }}">
                             <option>Masculino</option>
                             <option>Femenino</option>
                         </select>
-                        {{-- <input type="text" id="sexo" name="sexo"
-                                class="form-control @error('sexo') is-invalid @enderror"
-                                value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}"> --}}
                         @error('sexo')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
@@ -161,21 +169,38 @@
                         <label for="nombre">Código</label>
                         <input type="text" id="codigo" name="codigo"
                             class="form-control @error('codigo') is-invalid @enderror"
-                            value="{{ old('codigo') ?? ($estudiante->codigo ?? '') }}">
+                            value="{{ old('codigo') ?? ($profesor->codigo ?? '') }}">
                         @error('codigo')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
                     </div>
-
+                    
                     <div class="form-group">
-                        <label for="nombre">NRC</label>
-                        <input type="text" id="nrc" name="nrc"
-                            class="form-control @error('nrc') is-invalid @enderror"
-                            value="{{ old('nrc') ?? ($estudiante->nrc ?? '') }}">
-                        @error('nrc')
+                        <label for="nombre">Sexo</label>
+                        <select id="sexo" name="sexo" class="form-control mb-3 @error('sexo') is-invalid @enderror"
+                            value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}">
+                            <option>Masculino</option>
+                            <option>Femenino</option>
+                        </select>
+
+                        @error('sexo')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
                     </div>
+
+                    {{-- <div class="form-group">
+                      <label for="nombre">Nrc</label>
+                      <select id="nrc_id" name="nrc_id[]" multiple="" class="form-control mb-3 @error('nrc_id') is-invalid @enderror" value="{{ old('nrc_id') ?? ($profesor->nrc_id ?? '') }}">
+                        @foreach ($nrcs as $nrc)
+                            <option value="{{ $nrc->id }}" 
+                              {{ array_search($nrc->id, $profesor->nrc->pluck('id')->toArray()) !== false ? 'selected' : ''}}>
+                              {{ $nrc->materia }}</option>
+                        @endforeach
+                      </select>
+                      @error('nrc_id')
+                          <div class="text-danger"> {{ $message }} </div>
+                      @enderror
+                    </div> --}}
 
                     <button type="submit" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
@@ -204,7 +229,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                  <form action="{{ route('estudiante.destroy', $estudiante) }}" method="POST">
+                  <form action="{{ route('profesorDestroy', $profesor) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <input type="submit" value="Eliminar" class="btn btn-primary">

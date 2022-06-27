@@ -23,8 +23,8 @@ class EstudianteFactory extends Factory
             'apellido_materno' => $this->faker->lastname(),
             'fecha_nacimiento' => $this->faker->date('d_m_Y'),
             'sexo' => $sexo,
-            'codigo' => $this->faker->randomDigit,
-            'nrc' => $this->faker->randomDigit,
+            'codigo' => $this->faker->randomNumber(7, true),
+            'nrc' => $this->faker->randomNumber(7, true),
         ];
     }
 }

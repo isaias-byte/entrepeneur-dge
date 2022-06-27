@@ -42,6 +42,43 @@ class UserSeeder extends Seeder
             'password' => bcrypt('Pocoloco'),
         ]);
 
+        // Profesores
+        DB::table('users')->insert([
+            'rol_id' => 4,
+            'name' => 'Juan Antonio',
+            'apellido_paterno' => 'Rodriguez',
+            'apellido_materno' => 'Zambrano',
+            'email' => 'juan.zambrano@gmail.com',
+            'password' => bcrypt('Pocoloco'),
+        ]);
+
+        DB::table('users')->insert([
+            'rol_id' => 4,
+            'name' => 'Fernando',
+            'apellido_paterno' => 'Arauz',
+            'apellido_materno' => 'Gonzalez',
+            'email' => 'fer@gmail.com',
+            'password' => bcrypt('Pocoloco'),
+        ]);
+
+        DB::table('users')->insert([
+            'rol_id' => 4,
+            'name' => 'Aurora',
+            'apellido_paterno' => 'Macías',
+            'apellido_materno' => 'Pérez',
+            'email' => 'aurora123@gmail.com',
+            'password' => bcrypt('Pocoloco'),
+        ]);
+
         User::factory(100)->create();
+
+        DB::table('users')->insert([
+            'rol_id' => 4,
+            'name' => 'ProfesorTest',
+            'apellido_paterno' => 'Macías',
+            'apellido_materno' => 'Pérez',
+            'email' => 'test@gmail.com',
+            'password' => bcrypt('Pocoloco'),
+        ]);
     }
 }

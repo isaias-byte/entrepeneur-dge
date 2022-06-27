@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Administrador;
 use App\Models\Estudiante;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class AdministradorController extends Controller
 {
+
+    public function adminUsuarios() {
+        if (Gate::allows('admin-only', auth()->user()))
+        {
+            $usuarios = User::all();
+            return view('admin.admin-users', compact('usuarios'));
+        } else {
+            abort(403);
+        }
+    }
 
     public function adminEstudiantes() {
         if (Gate::allows('admin-only', auth()->user()))

@@ -41,7 +41,9 @@
         <tbody>
           @foreach ($estudiantes as $estudiante)
             <tr>            
-              <td>{{ $estudiante->nombre }}</td>
+              <td>
+                <a href="{{ route('estudiante.edit', $estudiante) }}">{{ $estudiante->nombre }}</a>
+              </td>
               <td>{{ $estudiante->apellido_paterno }}</td>
               <td>{{ $estudiante->apellido_materno }}</td>
               <td>{{ $estudiante->fecha_nacimiento }}</td>

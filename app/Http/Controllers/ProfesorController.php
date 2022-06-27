@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estudiante;
+use App\Models\Nrc;
+use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class EstudianteController extends Controller
+class ProfesorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +17,7 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        return view('estudiante.estudiante-index');
+        //
     }
 
     /**
@@ -29,11 +25,12 @@ class EstudianteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(Request $request)
+    {   
+        $nrcs = Nrc::get();
+        $profesor = Auth::user()->profesor;
+        return view('profesor.profesor-create', compact('profesor', 'nrcs'));
         
-        $estudiante = Auth::user()->estudiante;
-        return view('estudiante.estudiante-create', compact('estudiante'));
         
     }
 
@@ -52,7 +49,7 @@ class EstudianteController extends Controller
             'fecha_nacimiento' => ['required'],
             'sexo' => ['required'],
             'codigo' => ['required', 'string'],
-            'nrc' => ['required', 'string'],
+            'nrc_id' => ['required', 'string'],
         ]);
 
         $request->merge([
@@ -60,50 +57,47 @@ class EstudianteController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        Estudiante::create($request->all());
+        Profesor::create($request->all());
         
         return redirect()->route('dashboard');
-        // return $request->all();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Profesor  $profesor
      * @return \Illuminate\Http\Response
      */
-    public function show(Estudiante $estudiante)
+    public function show(Profesor $profesor)
     {
-        
+        return view('profesor.profesor-show', compact('profesor'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Profesor  $profesor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Estudiante $estudiante)
+    public function edit(Profesor $profesor)
     {
         if (Gate::allows('admin-only', auth()->user()))
         {
-            return view('estudiante.estudiante-create', compact('estudiante'));
+            return view('profesor.profesor-create', compact('profesor'));
         } else {
             abort(403);
         }
-        // return view('estudiante.estudiante-create', compact('estudiante'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Profesor  $profesor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudiante $estudiante)
+    public function update(Request $request, Profesor $profesor)
     {
-
         $request->validate([
             'nombre' => ['required', 'string', 'max:40'],
             'apellido_paterno' => ['required', 'string', 'max:40'],
@@ -111,30 +105,29 @@ class EstudianteController extends Controller
             'fecha_nacimiento' => ['required'],
             'sexo' => ['required'],
             'codigo' => ['required', 'string'],
-            'nrc' => ['required', 'string'],
+            'nrc_id' => ['required', 'string'],
         ]);
 
         $request->merge([
             'apellido_materno' => $request->apellido_materno ?? '',
         ]);
 
-        Estudiante::where('id', $estudiante->id)->update($request->except('_token', '_method'));
+        Profesor::where('id', $profesor->id)->update($request->except('_token', '_method'));
         if (auth()->user()->rol->id == 1) {
-            return redirect()->route('estudiante.edit', $estudiante);
+            return redirect()->route('profesor.edit', $profesor);
         } else {
-            return redirect()->route('estudiante.create');
+            return redirect()->route('profesor.create');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Profesor  $profesor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudiante $estudiante)
+    public function destroy(Profesor $profesor)
     {
-        $estudiante->delete();
-        return redirect()->route('adminEstudiantes');
+        //
     }
 }

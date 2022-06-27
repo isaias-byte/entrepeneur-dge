@@ -14,14 +14,15 @@
     </li>
     @if (auth()->user()->rol->id != 1)
         <hr class="sidebar-divider">
-        <li class="nav-item">
-            <a class="nav-link" href="#" aria-expanded="true">
-                {{-- <i class="far fa-fw fa-window-maximize"></i> --}}
-                <i class="fas fa-project-diagram"></i>
-                <span>Mi Proyecto</span>
-            </a>
-        </li>
-    
+        @if (auth()->user()->rol->id == 6)            
+            <li class="nav-item">
+                <a class="nav-link" href="#" aria-expanded="true">
+                    {{-- <i class="far fa-fw fa-window-maximize"></i> --}}
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Mi Proyecto</span>
+                </a>
+            </li>
+        @endif
         <li class="nav-item">
             <a class="nav-link" href="  
                 @switch(auth()->user()->rol->id)
@@ -34,7 +35,8 @@
                     @break
 
                     @case(4)
-                        
+                        {{-- Profesor --}}
+                        {{ route('profesorCreate') }}
                     @break
 
                     @case(5)
@@ -42,6 +44,7 @@
                     @break
 
                     @case(6)
+                        {{-- Estudiante --}}
                         {{ route('estudiante.create') }}
                     @break
                     @default
@@ -54,6 +57,7 @@
                 <span>Mi Perfil</span>
             </a>
         </li>
+        
     @endif
     
     <hr class="sidebar-divider">
@@ -139,7 +143,7 @@
         <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Administración</h6>
-                <a class="collapse-item" href="#">Usuarios</a>
+                <a class="collapse-item" href="{{ route('adminUsuarios') }}">Usuarios</a>
             
                 
             </div>
