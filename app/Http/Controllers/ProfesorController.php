@@ -6,7 +6,6 @@ use App\Models\Nrc;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class ProfesorController extends Controller
 {
@@ -25,13 +24,11 @@ class ProfesorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
-    {   
-        $nrcs = Nrc::get();
+    public function create()
+    {
         $profesor = Auth::user()->profesor;
-        return view('profesor.profesor-create', compact('profesor', 'nrcs'));
-        
-        
+        // return $profesor;
+        return view('profesor.profesor-create', compact('profesor'));
     }
 
     /**
@@ -49,7 +46,6 @@ class ProfesorController extends Controller
             'fecha_nacimiento' => ['required'],
             'sexo' => ['required'],
             'codigo' => ['required', 'string'],
-            'nrc_id' => ['required', 'string'],
         ]);
 
         $request->merge([
@@ -70,7 +66,8 @@ class ProfesorController extends Controller
      */
     public function show(Profesor $profesor)
     {
-        return view('profesor.profesor-show', compact('profesor'));
+        $nrcs = Nrc::get();
+        return view('profesor.profesor-show', compact('profesor', 'nrcs'));
     }
 
     /**
@@ -81,12 +78,7 @@ class ProfesorController extends Controller
      */
     public function edit(Profesor $profesor)
     {
-        if (Gate::allows('admin-only', auth()->user()))
-        {
-            return view('profesor.profesor-create', compact('profesor'));
-        } else {
-            abort(403);
-        }
+        return view('profesor.profesor-create', compact('profesor'));
     }
 
     /**
@@ -98,6 +90,7 @@ class ProfesorController extends Controller
      */
     public function update(Request $request, Profesor $profesor)
     {
+        // dd($request, $profesor);
         $request->validate([
             'nombre' => ['required', 'string', 'max:40'],
             'apellido_paterno' => ['required', 'string', 'max:40'],
@@ -105,7 +98,6 @@ class ProfesorController extends Controller
             'fecha_nacimiento' => ['required'],
             'sexo' => ['required'],
             'codigo' => ['required', 'string'],
-            'nrc_id' => ['required', 'string'],
         ]);
 
         $request->merge([
@@ -113,11 +105,7 @@ class ProfesorController extends Controller
         ]);
 
         Profesor::where('id', $profesor->id)->update($request->except('_token', '_method'));
-        if (auth()->user()->rol->id == 1) {
-            return redirect()->route('profesor.edit', $profesor);
-        } else {
-            return redirect()->route('profesor.create');
-        }
+        return redirect()->route('profesor.edit', $profesor);
     }
 
     /**
@@ -128,6 +116,20 @@ class ProfesorController extends Controller
      */
     public function destroy(Profesor $profesor)
     {
-        //
+        $profesor->delete();
+        return redirect()->route('adminProfesores');
+    }
+
+    public function agregarNrc(Request $request, Profesor $profesor) {
+        // dd($request->all(), $abogado);
+        $request->validate([
+            'nrc_id' => ['required'],
+        ]);
+
+        // return $request;
+        // return $profesor->nrcs()->sync($request->nrc_id);
+        $profesor->nrcs()->sync($request->nrc_id);
+
+        return redirect()->route('profesor.show', $profesor);
     }
 }

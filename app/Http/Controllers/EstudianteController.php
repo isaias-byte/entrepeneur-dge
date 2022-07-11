@@ -14,6 +14,10 @@ class EstudianteController extends Controller
         $this->middleware('auth');
     }
 
+    public function estudianteproyecto() {
+        return view('estudiante.estudiante-proyecto');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +66,7 @@ class EstudianteController extends Controller
 
         Estudiante::create($request->all());
         
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('info', 'Información registrada exitosamente');
         // return $request->all();
     }
 
@@ -120,9 +124,9 @@ class EstudianteController extends Controller
 
         Estudiante::where('id', $estudiante->id)->update($request->except('_token', '_method'));
         if (auth()->user()->rol->id == 1) {
-            return redirect()->route('estudiante.edit', $estudiante);
+            return redirect()->route('estudiante.edit', $estudiante)->with('info', 'Información registrada exitosamente');
         } else {
-            return redirect()->route('estudiante.create');
+            return redirect()->route('estudiante.create')->with('info', 'Información registrada exitosamente');
         }
     }
 
@@ -137,4 +141,6 @@ class EstudianteController extends Controller
         $estudiante->delete();
         return redirect()->route('adminEstudiantes');
     }
+
+    
 }

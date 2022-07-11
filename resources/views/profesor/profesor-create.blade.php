@@ -1,5 +1,9 @@
 @extends('layouts.ruang')
 
+@section('css_files')
+  @include('css_files.css-form')
+@endsection
+
 @section('sidebar')
     @include('sidebar-user')
 @endsection
@@ -50,17 +54,6 @@
                                 </div>
                                 <div class="col-sm-4 text-center"></div>
                             </div>
-                            <div class="row d-flex mt-1">
-                                <div class="col text-center">
-                                    <a href="{{ route('profesorShow', $profesor) }}" class="btn btn-info btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                        <span class="text">Añadir NRC'S</span>
-                                    </a>
-                                </div>
-                                <div class="col-sm-4 text-center"></div>
-                            </div>
                         @else
                             <div class="row mt-1">
                                 <div class="col-sm-8">
@@ -79,12 +72,27 @@
                             </div>
                             <div class="row d-flex mt-1">
                                 <div class="col text-center">
-                                    <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#exampleModal" id="#myBtn">
+                                    <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
+                                        data-target="#exampleModal" id="#myBtn">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>
                                         <span class="text">Eliminar Profesor</span>
                                     </button>
+                                </div>
+                                <div class="col-sm-4 text-center"></div>
+                            </div>
+                        @endif
+                        @if (isset($profesor->user_id))
+                            <div class="row d-flex mt-1">
+                                <div class="col text-center">
+                                    <a href="{{ route('profesor.show', $profesor) }}"
+                                        class="btn btn-info btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">Añadir Materias</span>
+                                    </a>
                                 </div>
                                 <div class="col-sm-4 text-center"></div>
                             </div>
@@ -96,16 +104,17 @@
 
         <div class="col-lg-8">
             <!-- General Element -->
+            
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Registro</h6>
                 </div>
                 <div class="card-body">
                     @if (isset($profesor->user_id))
-                        <form action="{{ route('profesorUpdate', $profesor) }}" method="post">
+                        <form action="{{ route('profesor.update', $profesor) }}" method="post">
                             @method('PATCH')
                         @else
-                            <form action="{{ route('profesorStore') }}" method="post">
+                            <form action="{{ route('profesor.store') }}" method="post">
                     @endif
                     @csrf
                     <div class="form-group">
@@ -155,7 +164,8 @@
 
                     <div class="form-group">
                         <label for="nombre">Sexo</label>
-                        <select id="sexo" name="sexo" class="form-control mb-3 @error('sexo') is-invalid @enderror"
+                        <select id="sexo" name="sexo"
+                            class="form-control mb-3 @error('sexo') is-invalid @enderror"
                             value="{{ old('sexo') ?? ($profesor->sexo ?? '') }}">
                             <option>Masculino</option>
                             <option>Femenino</option>
@@ -174,8 +184,8 @@
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
                     </div>
-                    
-                    <div class="form-group">
+
+                    {{-- <div class="form-group">
                         <label for="nombre">Sexo</label>
                         <select id="sexo" name="sexo" class="form-control mb-3 @error('sexo') is-invalid @enderror"
                             value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}">
@@ -186,7 +196,7 @@
                         @error('sexo')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     {{-- <div class="form-group">
                       <label for="nombre">Nrc</label>
@@ -214,29 +224,35 @@
             </div>
 
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+        @if (isset($profesor->user_id))
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Está seguro que desea eliminar este registro?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                            <form action="{{ route('profesor.destroy', $profesor) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" value="Eliminar" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>¿Está seguro que desea eliminar este registro?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                  <form action="{{ route('profesorDestroy', $profesor) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Eliminar" class="btn btn-primary">
-                    </form>
-                </div>
-              </div>
             </div>
-          </div>
+        @endif
     </div>
+@endsection
+
+@section('scripts')
+    @include('scripts.script-form')
 @endsection

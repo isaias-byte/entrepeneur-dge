@@ -28,6 +28,7 @@
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/ruang-admin.min.css') }}" rel="stylesheet">
+  @yield('css_files')
 </head>
 
 <body id="page-top">
@@ -46,28 +47,6 @@
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           @yield('content')
-          <!-- Modal Logout -->
-          {{-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure you want to logout?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                  <a href="login.html" class="btn btn-primary">Logout</a>
-                </div>
-              </div>
-            </div>
-          </div> --}}
-
         </div>
         <!---Container Fluid-->
       </div>
@@ -85,27 +64,8 @@
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-  <!-- Select2 -->
-  <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
-  <!-- Bootstrap Datepicker -->
-  <script src="{{ asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-  <!-- Bootstrap Touchspin -->
-  <script src="{{ asset('vendor/bootstrap-touchspin/js/jquery.bootstrap-touchspin.js') }}"></script>
-  <!-- ClockPicker -->
-  <script src="{{ asset('vendor/clock-picker/clockpicker.js') }}"></script>
   <script src="{{ asset('js/ruang-admin.min.js') }}"></script>
-  <script src="{{ asset('js/date-picker.js') }}"></script>
-  <script src="{{ asset('vendor/clock-picker/clockpicker.js') }}"></script>
-  <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
-  <!-- Page level custom scripts -->
-  <script>
-    $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-  </script>
+  @yield('scripts')
 
 </body>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Administrador;
 use App\Models\Estudiante;
+use App\Models\Profesor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -26,6 +27,17 @@ class AdministradorController extends Controller
         {
             $estudiantes = Estudiante::all();
             return view('admin.admin-estudiantes', compact('estudiantes'));
+        } else {
+            abort(403);
+        }
+        
+    }
+
+    public function adminProfesores() {
+        if (Gate::allows('admin-only', auth()->user()))
+        {
+            $profesores = Profesor::with('nrcs')->get();
+            return view('admin.admin-profesores', compact('profesores'));
         } else {
             abort(403);
         }

@@ -14,8 +14,8 @@ class CreateNrcProfesorTable extends Migration
     public function up()
     {
         Schema::create('nrc_profesor', function (Blueprint $table) {
-            $table->foreignId('nrc')->constrained();
-            $table->foreignId('profesor')->constrained()->onDelete('cascade');
+            $table->foreignId('profesor_id')->constrained();
+            $table->foreignId('nrc_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -31,8 +31,6 @@
     </div>
 
     <div class="col-lg-8 col-md-12 m-auto mt-5 shadow-lg">
-
-
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -58,9 +56,4 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        {{-- <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/inicio">Home</a></li>
-        <li class="breadcrumb-item">Pages</li>
-        <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
-    </ol> --}}
     @endsection

@@ -1,5 +1,9 @@
 @extends('layouts.ruang')
 
+@section('css_files')
+    @include('css_files.css-form')
+@endsection
+
 @section('sidebar')
     @include('sidebar-user')
 @endsection
@@ -9,6 +13,14 @@
 @endsection
 
 @section('content')
+    @if (session('info'))
+        <div class="col-lg-4">
+            <div class="alert alert-success" id="success-alert">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>¡Éxito! </strong> {{ session('info') }}
+            </div>
+        </div>
+    @endif
     <div class="row">
         <div class="col-lg-4">
             <!-- Form Basic -->
@@ -29,7 +41,8 @@
                                 style="border-radius: 50%" width="110" height="110">
                             <div class="user-info text-center">
                                 <h4>{{ $estudiante->user->name }}</h4>
-                                <p class="badge bg-primary text-uppercase text-white">{{ $estudiante->user->rol->rol }}</p>
+                                <p class="badge bg-primary text-uppercase text-white">{{ $estudiante->user->rol->rol }}
+                                </p>
                             </div>
                         @endif
                     </div>
@@ -68,7 +81,8 @@
                             </div>
                             <div class="row d-flex mt-1">
                                 <div class="col text-center">
-                                    <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal" data-target="#exampleModal" id="#myBtn">
+                                    <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
+                                        data-target="#exampleModal" id="#myBtn">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>
@@ -144,7 +158,8 @@
 
                     <div class="form-group">
                         <label for="nombre">Sexo</label>
-                        <select id="sexo" name="sexo" class="form-control mb-3 @error('sexo') is-invalid @enderror"
+                        <select id="sexo" name="sexo"
+                            class="form-control mb-3 @error('sexo') is-invalid @enderror"
                             value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}">
                             <option>Masculino</option>
                             <option>Femenino</option>
@@ -192,26 +207,30 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Está seguro que desea eliminar este registro?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                        <form action="{{ route('estudiante.destroy', $estudiante) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Eliminar" class="btn btn-primary">
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                  <p>¿Está seguro que desea eliminar este registro?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                  <form action="{{ route('estudiante.destroy', $estudiante) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <input type="submit" value="Eliminar" class="btn btn-primary">
-                    </form>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </div>
+@endsection
+
+@section('scripts')
+    @include('scripts.script-form')
 @endsection

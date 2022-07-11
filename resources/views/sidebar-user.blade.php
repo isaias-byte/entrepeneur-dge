@@ -16,7 +16,7 @@
         <hr class="sidebar-divider">
         @if (auth()->user()->rol->id == 6)            
             <li class="nav-item">
-                <a class="nav-link" href="#" aria-expanded="true">
+                <a class="nav-link" href="{{ route('estudianteproyecto') }}" aria-expanded="true">
                     {{-- <i class="far fa-fw fa-window-maximize"></i> --}}
                     <i class="fas fa-project-diagram"></i>
                     <span>Mi Proyecto</span>
@@ -36,7 +36,7 @@
 
                     @case(4)
                         {{-- Profesor --}}
-                        {{ route('profesorCreate') }}
+                        {{ route('profesor.create') }}
                     @break
 
                     @case(5)
@@ -70,19 +70,7 @@
             <i class="far fa-fw fa-window-maximize"></i>
             <span>Material Disponible</span>
         </a>
-        {{-- <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
-          data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Bootstrap UI</h6>
-              <a class="collapse-item" href="alerts.html">Alerts</a>
-              <a class="collapse-item" href="buttons.html">Buttons</a>
-              <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-              <a class="collapse-item" href="modals.html">Modals</a>
-              <a class="collapse-item" href="popovers.html">Popovers</a>
-              <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
-          </div>
-      </div>
-  </li> --}}
+        
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-target="#collapseForm" aria-expanded="true"
             aria-controls="collapseForm">
@@ -130,8 +118,16 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('adminEstudiantes') }}" data-target="#collapseTable" aria-expanded="true"
             aria-controls="collapseTable">
-            <i class="far fa-file-alt"></i>
+            
+            <i class="fas fa-user-graduate"></i>
             <span>Alumnos</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('adminProfesores') }}" data-target="#collapseTable" aria-expanded="true"
+            aria-controls="collapseTable">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Profesores</span>
         </a>
     </li>
     <li class="nav-item">

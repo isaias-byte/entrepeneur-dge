@@ -50,6 +50,10 @@ class JetstreamServiceProvider extends ServiceProvider
             return view('auth.ruang-login');
         });
 
+        // Fortify::requestPasswordResetLinkView(function () {
+        //     return view('user.mi-cuenta');
+        // });
+
     }
 
     /**

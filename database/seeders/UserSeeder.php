@@ -70,6 +70,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('Pocoloco'),
         ]);
 
+        //aquí estamos añadiendo 100 usuarios 
         User::factory(100)->create();
 
         DB::table('users')->insert([

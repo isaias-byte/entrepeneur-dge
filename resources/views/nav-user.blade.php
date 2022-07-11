@@ -40,10 +40,12 @@
                 <h6>Configuración de la Cuenta</h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Cuenta
+            
+                <a class="dropdown-item" href="{{ route('user.cuenta')}}">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cuenta
             </a>
+            
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"

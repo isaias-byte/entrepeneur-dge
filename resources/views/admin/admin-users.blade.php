@@ -1,5 +1,9 @@
 @extends('layouts.ruang')
 
+@section('css_files')
+  @include('css_files.css-form')
+@endsection
+
 @section('sidebar')
     @include('sidebar-user')
 @endsection
@@ -47,4 +51,8 @@
     </table>
   </div>
 </div>
+@endsection
+
+@section('scripts')
+  @include('scripts.script-admin')
 @endsection

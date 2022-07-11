@@ -23,6 +23,7 @@ class CreateProfesorsTable extends Migration
             $table->string('sexo');
             $table->string('codigo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

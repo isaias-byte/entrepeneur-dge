@@ -25,6 +25,7 @@ class CreateEstudiantesTable extends Migration
             $table->string('codigo');
             $table->string('nrc');
             $table->timestamps();
+            $table->softDeletes();
             // $table->foreignId();
         });
     }

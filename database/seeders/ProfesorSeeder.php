@@ -25,16 +25,15 @@ class ProfesorSeeder extends Seeder
             'codigo' => '123456789',
         ]);
 
-        DB::table('profesors')->insert([
-            'user_id' => 5,
-            
-            'nombre' => 'Fernando',
-            'apellido_paterno' => 'Arauz',
-            'apellido_materno' => 'Gonzalez',
-            'fecha_nacimiento' => '25/11/2001',
-            'sexo' => 'Masculino',
-            'codigo' => '123456789',
-        ]);
+        // DB::table('profesors')->insert([
+        //     'user_id' => 5,
+        //     'nombre' => 'Fernando',
+        //     'apellido_paterno' => 'Arauz',
+        //     'apellido_materno' => 'Gonzalez',
+        //     'fecha_nacimiento' => '25/11/2001',
+        //     'sexo' => 'Masculino',
+        //     'codigo' => '123456789',
+        // ]);
 
         DB::table('profesors')->insert([
             'user_id' => 6,
