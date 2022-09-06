@@ -117,7 +117,7 @@ class ProfesorController extends Controller
     public function destroy(Profesor $profesor)
     {
         $profesor->delete();
-        return redirect()->route('adminProfesores');
+        return redirect()->route('admin.profesores');
     }
 
     public function agregarNrc(Request $request, Profesor $profesor) {

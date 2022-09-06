@@ -14,12 +14,12 @@
     </li>
     @if (auth()->user()->rol->id != 1)
         <hr class="sidebar-divider">
-        @if (auth()->user()->rol->id == 6)            
+        @if (auth()->user()->rol->id == 5)            
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('estudianteproyecto') }}" aria-expanded="true">
-                    {{-- <i class="far fa-fw fa-window-maximize"></i> --}}
+                <a class="nav-link" href="{{ route('estudianteProyecto') }}" aria-expanded="true">
+
                     <i class="fas fa-project-diagram"></i>
-                    <span>Mi Proyecto</span>
+                    <span>Proyecto</span>
                 </a>
             </li>
         @endif
@@ -40,7 +40,8 @@
                     @break
 
                     @case(5)
-                        
+                        {{-- Embajador --}}
+                        {{ route('embajador.create') }}
                     @break
 
                     @case(6)
@@ -116,7 +117,7 @@
         
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('adminEstudiantes') }}" data-target="#collapseTable" aria-expanded="true"
+        <a class="nav-link collapsed" href="{{ route('admin.estudiantes') }}" data-target="#collapseTable" aria-expanded="true"
             aria-controls="collapseTable">
             
             <i class="fas fa-user-graduate"></i>
@@ -124,10 +125,17 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('adminProfesores') }}" data-target="#collapseTable" aria-expanded="true"
+        <a class="nav-link collapsed" href="{{ route('admin.profesores') }}" data-target="#collapseTable" aria-expanded="true"
             aria-controls="collapseTable">
             <i class="fas fa-chalkboard-teacher"></i>
             <span>Profesores</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('admin.embajadores') }}" data-target="#collapseTable" aria-expanded="true"
+            aria-controls="collapseTable">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Embajadores</span>
         </a>
     </li>
     <li class="nav-item">
@@ -140,8 +148,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Administración</h6>
                 <a class="collapse-item" href="{{ route('adminUsuarios') }}">Usuarios</a>
-            
-                
             </div>
         </div>
     </li>

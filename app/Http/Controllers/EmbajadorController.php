@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estudiante;
+use App\Models\Embajador;
+use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class EstudianteController extends Controller
+class EmbajadorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
+    public function estudianteproyecto() {
+        return view('embajador.estudiante-proyecto');
+    }
 
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        return view('estudiante.estudiante-index');
+        //
     }
 
     /**
@@ -32,10 +32,9 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        
-        $estudiante = Auth::user()->estudiante;
-        return view('estudiante.estudiante-create', compact('estudiante'));
-        
+        $embajador = Auth::user()->embajador;
+        $profesores = Profesor::get();
+        return view('embajador.embajador-create', compact('embajador', 'profesores'));
     }
 
     /**
@@ -50,10 +49,8 @@ class EstudianteController extends Controller
             'nombre' => ['required', 'string', 'max:40'],
             'apellido_paterno' => ['required', 'string', 'max:40'],
             'apellido_materno' => ['max:40'],
-            'fecha_nacimiento' => ['required'],
-            'sexo' => ['required'],
-            'codigo' => ['required', 'string'],
-            'nrc' => ['required', 'string'],
+            'telefono' => ['required', 'numeric'],
+            'profesor_id' => ['required']
         ]);
 
         $request->merge([
@@ -61,83 +58,77 @@ class EstudianteController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        Estudiante::create($request->all());
+        Embajador::create($request->all());
         
-        return redirect()->route('dashboard')->with('info', 'Información registrada exitosamente');
-        // return $request->all();
+        return redirect()->route('embajador.create')->with('info', 'Información registrada exitosamente');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Embajador  $embajador
      * @return \Illuminate\Http\Response
      */
-    public function show(Estudiante $estudiante)
+    public function show(Embajador $embajador)
     {
-        
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Embajador  $embajador
      * @return \Illuminate\Http\Response
      */
-    public function edit(Estudiante $estudiante)
+    public function edit(Embajador $embajador)
     {
         if (Gate::allows('admin-only', auth()->user()))
         {
-            return view('estudiante.estudiante-create', compact('estudiante'));
+            $profesores = Profesor::get();
+            return view('embajador.embajador-create', compact('embajador', 'profesores'));
         } else {
             abort(403);
         }
-        // return view('estudiante.estudiante-create', compact('estudiante'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Embajador  $embajador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudiante $estudiante)
+    public function update(Request $request, Embajador $embajador)
     {
-
         $request->validate([
             'nombre' => ['required', 'string', 'max:40'],
             'apellido_paterno' => ['required', 'string', 'max:40'],
             'apellido_materno' => ['max:40'],
-            'fecha_nacimiento' => ['required'],
-            'sexo' => ['required'],
-            'codigo' => ['required', 'string'],
-            'nrc' => ['required', 'string'],
+            'telefono' => ['required', 'numeric'],
+            'profesor_id' => ['required']
         ]);
 
         $request->merge([
             'apellido_materno' => $request->apellido_materno ?? '',
         ]);
 
-        Estudiante::where('id', $estudiante->id)->update($request->except('_token', '_method'));
+        Embajador::where('id', $embajador->id)->update($request->except('_token', '_method'));
         if (auth()->user()->rol->id == 1) {
-            return redirect()->route('estudiante.edit', $estudiante)->with('info', 'Información registrada exitosamente');
+            return redirect()->route('embajador.edit', $embajador)->with('info', 'Información registrada exitosamente');
         } else {
-            return redirect()->route('estudiante.create')->with('info', 'Información registrada exitosamente');
+            return redirect()->route('embajador.create')->with('info', 'Información registrada exitosamente');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Estudiante  $estudiante
+     * @param  \App\Models\Embajador  $embajador
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudiante $estudiante)
+    public function destroy(Embajador $embajador)
     {
-        $estudiante->delete();
-        return redirect()->route('admin.estudiantes');
+        $embajador->delete();
+        return redirect()->route('admin.embajadores')->with('info', 'Embajador eliminado exitosamente');
     }
-
-    
 }

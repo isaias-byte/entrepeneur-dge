@@ -14,6 +14,12 @@
 
 @section('content')
     <div class="col-lg-12">
+        @if (session('info'))            
+            <div class="alert alert-success" id="success-alert">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>¡Éxito! </strong> {{ session('info') }}
+            </div>          
+        @endif
         <!-- Four directions -->
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -77,6 +83,30 @@
                 </form>
             </div>
         </div>
+        {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Está seguro que desea eliminar este registro?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                        <form action="{{ route('estudiante.destroy', $estudiante) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Eliminar" class="btn btn-primary">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
     </div>
 @endsection
 

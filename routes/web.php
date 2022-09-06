@@ -2,6 +2,7 @@
 
 use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\EmbajadorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\ProfesorController;
@@ -32,7 +33,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-//  Rutas de estudiantes
+//*  Rutas de estudiantes
 // Route::resource('estudiante', EstudianteController::class)->middleware('verified');
 Route::get('estudiante/create', [EstudianteController::class, 'create'])->name('estudiante.create');
 Route::post('estudiante/store', [EstudianteController::class, 'store'])->name('estudiante.store');
@@ -42,14 +43,15 @@ Route::patch('estudiante/update/{estudiante}', [EstudianteController::class, 'up
 Route::delete('estudiante/destroy/{estudiante}', [EstudianteController::class, 'destroy'])->name('estudiante.destroy');
 Route::get('estudiante/mi-proyecto', [EstudianteController::class, 'estudianteproyecto'])->name('estudianteproyecto');
 
-//Rutas de administradores
-Route::get('administrador/estudiantes', [AdministradorController::class, 'adminEstudiantes'])->name('adminEstudiantes');
-Route::get('administrador/profesores', [AdministradorController::class, 'adminProfesores'])->name('adminProfesores');
+//*Rutas de administradores
+Route::get('administrador/estudiantes', [AdministradorController::class, 'adminEstudiantes'])->name('admin.estudiantes');
+Route::get('administrador/profesores', [AdministradorController::class, 'adminProfesores'])->name('admin.profesores');
+Route::get('administrador/embajadores', [AdministradorController::class, 'adminEmbajadores'])->name('admin.embajadores');
 Route::get('administrador/usuarios', [AdministradorController::class, 'adminUsuarios'])->name('adminUsuarios');
 
 
 // Route::resource('profesor', ProfesorController::class)->middleware('verified');
-//Rutas de profesores
+//*Rutas de profesores
 Route::get('profesor/create', [ProfesorController::class, 'create'])->name('profesor.create');
 Route::post('profesor/store', [ProfesorController::class, 'store'])->name('profesor.store');
 Route::get('profesor/show/{profesor}', [ProfesorController::class, 'show'])->name('profesor.show');
@@ -58,7 +60,17 @@ Route::patch('profesor/update/{profesor}', [ProfesorController::class, 'update']
 Route::delete('profesor/destroy/{profesor}', [ProfesorController::class, 'destroy'])->name('profesor.destroy');
 Route::post('profesor/{profesor}/nrcsrua', [ProfesorController::class, 'agregarNrc'])->name('profesor.nrc');
 
-//Ruta de usuarios
+
+//*Rutas de embajadores
+Route::get('embajador/create', [EmbajadorController::class, 'create'])->name('embajador.create');
+Route::post('embajador/store', [EmbajadorController::class, 'store'])->name('embajador.store');
+Route::get('embajador/show/{embajador}', [EmbajadorController::class, 'show'])->name('embajador.show');
+Route::get('embajador/edit/{embajador}', [EmbajadorController::class, 'edit'])->name('embajador.edit');
+Route::patch('embajador/update/{embajador}', [EmbajadorController::class, 'update'])->name('embajador.update');
+Route::delete('embajador/destroy/{embajador}', [EmbajadorController::class, 'destroy'])->name('embajador.destroy');
+Route::get('embajador/mi-proyecto', [EmbajadorController::class, 'estudianteproyecto'])->name('estudianteProyecto');
+
+//*Ruta de usuarios
 Route::get('mi-cuenta', [UsersController::class, 'miCuenta'])->name('user.cuenta');
 Route::patch('mi-cuenta/{user}', [UsersController::class, 'actualizarCuenta'])->name('user.actualizar');
 

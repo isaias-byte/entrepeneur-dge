@@ -31,5 +31,8 @@ class UpdateUserPassword implements UpdatesUserPasswords
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();
+
+        return redirect()->route('user.cuenta')->with('info', 'Contraseña actualizada correctamente');
+        
     }
 }

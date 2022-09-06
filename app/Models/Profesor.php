@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profesor extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['user_id','nombre', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento', 'sexo', 'codigo',];
 
@@ -24,5 +23,10 @@ class Profesor extends Model
 
     public function nrcs() {
         return $this->belongsToMany(Nrc::class);
+    }
+
+    public function profesor()
+    {
+        return $this->hasOne(Embajador::class);
     }
 }

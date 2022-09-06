@@ -81,5 +81,14 @@ class UserSeeder extends Seeder
             'email' => 'test@gmail.com',
             'password' => bcrypt('Pocoloco'),
         ]);
+
+        DB::table('users')->insert([
+            'rol_id' => 5,
+            'name' => 'Embajador Test',
+            'apellido_paterno' => 'Macías',
+            'apellido_materno' => 'Pérez',
+            'email' => 'embajador@gmail.com',
+            'password' => bcrypt('Pocoloco'),
+        ]);
     }
 }

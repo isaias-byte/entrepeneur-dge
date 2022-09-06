@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrador;
+use App\Models\Embajador;
 use App\Models\Estudiante;
 use App\Models\Profesor;
 use App\Models\User;
@@ -38,6 +39,17 @@ class AdministradorController extends Controller
         {
             $profesores = Profesor::with('nrcs')->get();
             return view('admin.admin-profesores', compact('profesores'));
+        } else {
+            abort(403);
+        }
+        
+    }
+
+    public function adminEmbajadores() {
+        if (Gate::allows('admin-only', auth()->user()))
+        {
+            $embajadores = Embajador::all();
+            return view('admin.admin-embajadores', compact('embajadores'));
         } else {
             abort(403);
         }

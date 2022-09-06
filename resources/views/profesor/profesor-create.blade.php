@@ -128,7 +128,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nombre">Apellido Paterno</label>
+                        <label for="apellido_paterno">Apellido Paterno</label>
                         <input type="text" id="apellido_paterno" name="apellido_paterno"
                             class="form-control @error('apellido_paterno') is-invalid @enderror"
                             value="{{ old('apellido_paterno') ?? ($profesor->apellido_paterno ?? '') }}">
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nombre">Apellido Materno</label>
+                        <label for="apellido_materno">Apellido Materno</label>
                         <input type="text" id="apellido_materno" name="apellido_materno"
                             class="form-control @error('apellido_materno') is-invalid @enderror"
                             value="{{ old('apellido_materno') ?? ($profesor->apellido_materno ?? '') }}">
@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="form-group" id="simple-date1">
-                        <label for="publication">Fecha de Nacimiento</label>
+                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
                         <div class="input-group date">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-calendar"></i></span>
@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nombre">Sexo</label>
+                        <label for="sexo">Sexo</label>
                         <select id="sexo" name="sexo"
                             class="form-control mb-3 @error('sexo') is-invalid @enderror"
                             value="{{ old('sexo') ?? ($profesor->sexo ?? '') }}">
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="nombre">Código</label>
+                        <label for="codigo">Código</label>
                         <input type="text" id="codigo" name="codigo"
                             class="form-control @error('codigo') is-invalid @enderror"
                             value="{{ old('codigo') ?? ($profesor->codigo ?? '') }}">
