@@ -5,6 +5,7 @@ use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\EmbajadorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\JuezController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\UsersController;
 
@@ -69,6 +70,17 @@ Route::get('embajador/edit/{embajador}', [EmbajadorController::class, 'edit'])->
 Route::patch('embajador/update/{embajador}', [EmbajadorController::class, 'update'])->name('embajador.update');
 Route::delete('embajador/destroy/{embajador}', [EmbajadorController::class, 'destroy'])->name('embajador.destroy');
 Route::get('embajador/mi-proyecto', [EmbajadorController::class, 'estudianteproyecto'])->name('estudianteProyecto');
+
+
+//*Rutas de jueces
+Route::get('juez/create', [JuezController::class, 'create'])->name('juez.create');
+Route::post('juez/store', [JuezController::class, 'store'])->name('juez.store');
+Route::get('juez/show/{juez}', [JuezController::class, 'show'])->name('juez.show');
+Route::get('juez/edit/{juez}', [JuezController::class, 'edit'])->name('juez.edit');
+Route::patch('juez/update/{juez}', [JuezController::class, 'update'])->name('juez.update');
+Route::delete('juez/destroy/{juez}', [JuezController::class, 'destroy'])->name('juez.destroy');
+Route::get('juez/mi-proyecto', [JuezController::class, 'estudianteproyecto'])->name('estudianteProyecto');
+
 
 //*Ruta de usuarios
 Route::get('mi-cuenta', [UsersController::class, 'miCuenta'])->name('user.cuenta');
