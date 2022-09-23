@@ -48,6 +48,7 @@ Route::get('estudiante/mi-proyecto', [EstudianteController::class, 'estudiantepr
 Route::get('administrador/estudiantes', [AdministradorController::class, 'adminEstudiantes'])->name('admin.estudiantes');
 Route::get('administrador/profesores', [AdministradorController::class, 'adminProfesores'])->name('admin.profesores');
 Route::get('administrador/embajadores', [AdministradorController::class, 'adminEmbajadores'])->name('admin.embajadores');
+Route::get('administrador/jueces', [AdministradorController::class, 'adminJueces'])->name('admin.jueces');
 Route::get('administrador/usuarios', [AdministradorController::class, 'adminUsuarios'])->name('adminUsuarios');
 
 

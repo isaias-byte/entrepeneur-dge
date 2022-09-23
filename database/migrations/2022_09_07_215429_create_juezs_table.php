@@ -15,17 +15,18 @@ class CreateJuezsTable extends Migration
     {
         Schema::create('juezs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users', 'id');
             $table->string('nombre', 30);
             $table->string('apellido_paterno', 30);
             $table->string('apellido_materno', 30);
-            $table->string('email');
             $table->string('telefono');
             $table->string('empresa');
             $table->string('puesto');
             $table->text('sintesis')->nullable();
-            $table->string('fotografia');
-            $table->foreignId('profesor_id')->constrained('profesors', 'id');
+            $table->string('fotografia')->nullable();
+            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

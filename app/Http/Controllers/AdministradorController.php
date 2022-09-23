@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Administrador;
 use App\Models\Embajador;
 use App\Models\Estudiante;
+use App\Models\Juez;
 use App\Models\Profesor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -45,6 +46,16 @@ class AdministradorController extends Controller
         
     }
 
+    public function adminJueces() {
+        if (Gate::allows('admin-only', auth()->user()))
+        {
+            $jueces = Juez::all();
+            return view('admin.admin-jueces', compact('jueces'));
+        } else {
+            abort(403);
+        }
+    }
+
     public function adminEmbajadores() {
         if (Gate::allows('admin-only', auth()->user()))
         {
@@ -53,7 +64,6 @@ class AdministradorController extends Controller
         } else {
             abort(403);
         }
-        
     }
 
     /**

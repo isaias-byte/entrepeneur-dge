@@ -31,7 +31,8 @@
                     @break
 
                     @case(3)
-                        
+                        {{-- Juez --}}
+                        {{ route('juez.create') }}
                     @break
 
                     @case(4)
@@ -136,6 +137,13 @@
             aria-controls="collapseTable">
             <i class="fas fa-chalkboard-teacher"></i>
             <span>Embajadores</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('admin.jueces') }}" data-target="#collapseTable" aria-expanded="true"
+            aria-controls="collapseTable">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Jueces</span>
         </a>
     </li>
     <li class="nav-item">

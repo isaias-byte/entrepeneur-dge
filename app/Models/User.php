@@ -84,4 +84,9 @@ class User extends Authenticatable
         return $this->hasOne(Embajador::class);
     }
 
+    public function juez()
+    {
+        return $this->hasOne(Juez::class);
+    }
+
 }

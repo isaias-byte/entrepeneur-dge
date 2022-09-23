@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Juez;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class JuezController extends Controller
 {
@@ -25,8 +27,8 @@ class JuezController extends Controller
     public function create()
     {
         $juez = Auth::user()->juez;
-        $profesores = Profesor::get();
-        return view('juez.juez-create', compact('juez', 'profesores'));
+        // dd($juez);
+        return view('juez.juez-create', compact('juez'));
     }
 
     /**
@@ -37,7 +39,23 @@ class JuezController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:40'],
+            'apellido_paterno' => ['required', 'string', 'max:40'],
+            'apellido_materno' => ['max:40'],
+            'telefono' => ['required', 'numeric'],
+            'empresa' => ['required', 'string', 'max:40'],
+            'puesto' => ['required', 'string', 'max:40'],
+        ]);
+
+        $request->merge([
+            'apellido_materno' => $request->apellido_materno ?? '',
+            'user_id' => Auth::id(),
+        ]);
+
+        Juez::create($request->all());
+        
+        return redirect()->route('juez.create')->with('info', 'Información registrada exitosamente');
     }
 
     /**
@@ -59,7 +77,13 @@ class JuezController extends Controller
      */
     public function edit(Juez $juez)
     {
-        //
+        if (Gate::allows('admin-only', auth()->user()))
+        {
+            // $profesores = Profesor::get();
+            return view('juez.juez-create', compact('juez'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -71,7 +95,26 @@ class JuezController extends Controller
      */
     public function update(Request $request, Juez $juez)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:40'],
+            'apellido_paterno' => ['required', 'string', 'max:40'],
+            'apellido_materno' => ['max:40'],
+            'telefono' => ['required', 'numeric'],
+            'empresa' => ['required', 'string', 'max:40'],
+            'puesto' => ['required', 'string', 'max:40'],
+        ]);
+
+        $request->merge([
+            'apellido_materno' => $request->apellido_materno ?? '',
+        ]);
+
+        Juez::where('id', $juez->id)->update($request->except('_token', '_method'));
+        if (auth()->user()->rol->id == 1) {
+            return redirect()->route('juez.edit', $juez)->with('info', 'Información registrada exitosamente');
+        } else {
+            return redirect()->route('juez.create')->with('info', 'Información registrada exitosamente');
+        }
+
     }
 
     /**
@@ -82,6 +125,7 @@ class JuezController extends Controller
      */
     public function destroy(Juez $juez)
     {
-        //
+        $juez->delete();
+        return redirect()->route('admin.jueces')->with('info', 'Embajador eliminado exitosamente');
     }
 }
