@@ -70,7 +70,8 @@ Route::get('embajador/show/{embajador}', [EmbajadorController::class, 'show'])->
 Route::get('embajador/edit/{embajador}', [EmbajadorController::class, 'edit'])->name('embajador.edit');
 Route::patch('embajador/update/{embajador}', [EmbajadorController::class, 'update'])->name('embajador.update');
 Route::delete('embajador/destroy/{embajador}', [EmbajadorController::class, 'destroy'])->name('embajador.destroy');
-Route::get('embajador/mi-proyecto', [EmbajadorController::class, 'estudianteproyecto'])->name('estudianteProyecto');
+Route::get('embajador/mi-proyecto', [EmbajadorController::class, 'estudianteproyecto'])->name('embajadorProyecto');
+Route::post('embajador/guardar-proyecto', [EmbajadorController::class, 'guardarVideo'])->name('embajador.guardarVideo');
 
 
 //*Rutas de jueces

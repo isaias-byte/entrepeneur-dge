@@ -16,7 +16,7 @@
         <hr class="sidebar-divider">
         @if (auth()->user()->rol->id == 5)            
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('estudianteProyecto') }}" aria-expanded="true">
+                <a class="nav-link" href="{{ route('embajadorProyecto') }}" aria-expanded="true">
 
                     <i class="fas fa-project-diagram"></i>
                     <span>Proyecto</span>
