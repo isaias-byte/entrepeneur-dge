@@ -17,18 +17,22 @@ class EmbajadorController extends Controller
 
     public function guardarVideo(Request $request) {
         // dd($request);
-        $request->validate([
-            'pitch' => ['required', 'mimetypes:video/avi,video/mpeg,video/mp4,video/flv'],
-            'plan_negocios' => ['required'],
-        ]);
-        
-        $pitch =  Auth::user()->id . "_" .  $request['pitch']->getClientOriginalName();
-        $plan_negocios = Auth::user()->id . "_" .  $request['plan_negocios']->getClientOriginalName();
+        if (Auth::user()->id == 5) {
+            $request->validate([
+                'pitch' => ['required', 'mimetypes:video/avi,video/mpeg,video/mp4,video/flv'],
+                'plan_negocios' => ['required'],
+            ]);
+            
+            $pitch =  Auth::user()->id . "_" .  $request['pitch']->getClientOriginalName();
+            $plan_negocios = Auth::user()->id . "_" .  $request['plan_negocios']->getClientOriginalName();
 
-        $request['pitch']->move(public_path("pitch"), $pitch);
-        $request['plan_negocios']->move(public_path("plan de negocios"), $plan_negocios);
-        // dd($pitch, $plan_negocios);
-        return redirect()->route('embajadorProyecto')->with('info', 'Información registrada exitosamente');
+            $request['pitch']->move(public_path("pitch"), $pitch);
+            $request['plan_negocios']->move(public_path("plan de negocios"), $plan_negocios);
+            // dd($pitch, $plan_negocios);
+            return redirect()->route('embajadorProyecto')->with('info', 'Información registrada exitosamente');
+        } else {
+            abort(403);
+        }
     }
 
     /**
