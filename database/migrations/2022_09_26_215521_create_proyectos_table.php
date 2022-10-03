@@ -17,7 +17,8 @@ class CreateProyectosTable extends Migration
             $table->id();
             $table->foreignId('embajador_id')->constrained('embajadors', 'id');
             //* Para subir videos y archivos
-            // $table->
+            $table->string("nombre", 80);
+            $table->foreignId("estudiante_id")->constrained("estudiantes", "id");
             $table->timestamps();
         });
     }

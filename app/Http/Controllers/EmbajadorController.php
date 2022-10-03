@@ -28,6 +28,7 @@ class EmbajadorController extends Controller
 
             $request['pitch']->move(public_path("pitch"), $pitch);
             $request['plan_negocios']->move(public_path("plan de negocios"), $plan_negocios);
+            
             // dd($pitch, $plan_negocios);
             return redirect()->route('embajadorProyecto')->with('info', 'Información registrada exitosamente');
         } else {

@@ -29,7 +29,26 @@
                 </div>
                 <div class="card-body">
                     <form action="{{ route('embajador.guardarVideo') }}" method="post" enctype="multipart/form-data">
-                        @csrf                        
+                        @csrf
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="file" class="custom-file-input @error('pitch') is-invalid @enderror" id="pitch" name="pitch" accept="video/*">
+                                    <label class="custom-file-label" for="pitch">Pitch (Video)</label>
+                                    @error('pitch')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col">
+                                    <input type="file" class="custom-file-input @error('pitch') is-invalid @enderror" id="pitch" name="pitch" accept="video/*">
+                                    <label class="custom-file-label" for="pitch">Pitch (Video)</label>
+                                    @error('pitch')
+                                        <div class="text-danger"> {{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>                         
                         <div class="form-group">
                             <h5>Pitch (Video)</h5>
                             <div class="custom-file">
