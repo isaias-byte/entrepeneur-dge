@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Embajador;
+use App\Models\Estudiante;
 use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,8 @@ class EmbajadorController extends Controller
 {
 
     public function estudianteproyecto() {
-        return view('embajador.estudiante-proyecto');
+        $estudiantes = Estudiante::all();
+        return view('embajador.estudiante-proyecto', compact('estudiantes'));
     }
 
     public function guardarVideo(Request $request) {

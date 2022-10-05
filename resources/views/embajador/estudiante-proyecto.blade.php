@@ -33,19 +33,22 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <input type="file" class="custom-file-input @error('pitch') is-invalid @enderror" id="pitch" name="pitch" accept="video/*">
-                                    <label class="custom-file-label" for="pitch">Pitch (Video)</label>
-                                    @error('pitch')
+                                    <label for="nombre_proyecto">Nombre del Proyecto</label>
+                                    <input type="text" id="nombre_proyecto" name="nombre_proyecto"
+                                        class="form-control @error('nombre_proyecto') is-invalid @enderror">
+                                    @error('nombre_proyecto')
                                         <div class="text-danger"> {{ $message }} </div>
                                     @enderror
+                                    
                                 </div>
                                 <div class="col-1"></div>
                                 <div class="col">
-                                    <input type="file" class="custom-file-input @error('pitch') is-invalid @enderror" id="pitch" name="pitch" accept="video/*">
-                                    <label class="custom-file-label" for="pitch">Pitch (Video)</label>
-                                    @error('pitch')
-                                        <div class="text-danger"> {{ $message }} </div>
-                                    @enderror
+                                    <label for="lider_proyecto">Nombre del Lider del Proyecto</label>
+                                    <select id="lider_proyecto" name="lider_proyecto"
+                                        class="form-control mb-3 @error('lider_proyecto') is-invalid @enderror">
+                                        <option>Masculino</option>
+                                        <option>Femenino</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>                         
