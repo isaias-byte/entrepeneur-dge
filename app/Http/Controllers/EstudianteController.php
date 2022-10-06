@@ -33,7 +33,6 @@ class EstudianteController extends Controller
     public function create()
     {
         
-        $estudiante = Auth::user()->estudiante;
         return view('estudiante.estudiante-create', compact('estudiante'));
         
     }

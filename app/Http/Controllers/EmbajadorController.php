@@ -17,7 +17,7 @@ class EmbajadorController extends Controller
         return view('embajador.estudiante-proyecto', compact('estudiantes'));
     }
 
-    public function guardarVideo(Request $request) {
+    public function guardarVideo(Request $request, Embajador $embajador) {
         // dd($request);
         if (Auth::user()->id == 5) {
             $request->validate([
@@ -30,6 +30,13 @@ class EmbajadorController extends Controller
 
             $request['pitch']->move(public_path("pitch"), $pitch);
             $request['plan_negocios']->move(public_path("plan de negocios"), $plan_negocios);
+
+            
+            $embajador->pitch = $pitch;
+            $embajador->plan_negocios = $plan_negocios;
+            $embajador->lider_proyecto = $request['lider_proyecto'];
+
+
             
             // dd($pitch, $plan_negocios);
             return redirect()->route('embajadorProyecto')->with('info', 'Información registrada exitosamente');

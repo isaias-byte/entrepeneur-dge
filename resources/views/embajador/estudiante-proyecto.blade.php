@@ -46,8 +46,10 @@
                                     <label for="lider_proyecto">Nombre del Lider del Proyecto</label>
                                     <select id="lider_proyecto" name="lider_proyecto"
                                         class="form-control mb-3 @error('lider_proyecto') is-invalid @enderror">
-                                        <option>Masculino</option>
-                                        <option>Femenino</option>
+                                        @foreach ($estudiantes as $estudiante)
+                                            <option value="{{ $estudiante->id }}">{{ $estudiante->nombre_completo }}</option>
+                                        @endforeach
+                                        
                                     </select>
                                 </div>
                             </div>

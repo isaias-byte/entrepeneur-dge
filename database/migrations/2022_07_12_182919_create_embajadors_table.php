@@ -22,9 +22,9 @@ class CreateEmbajadorsTable extends Migration
             $table->string('telefono');
             $table->string("pitch", 100)->nullable();
             $table->string("plan_negocios", 100)->nullable();
-
+            $table->string("lider_proyecto", 10)->nullable();
             $table->foreignId('profesor_id')->constrained('profesors', 'id');
-            $table->foreignId('estudiante_id')->constrained('estudiantes', 'id');
+            
             $table->timestamps();
             $table->softDeletes();
         });

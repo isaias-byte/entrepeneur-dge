@@ -23,4 +23,8 @@ class Estudiante extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getNombreCompletoAttribute() {
+        return $this->nombre . ' ' . $this->apellido_paterno . ' ' . $this->apellido_materno;
+    }
 }
