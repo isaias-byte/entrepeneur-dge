@@ -14,15 +14,22 @@ class EmbajadorController extends Controller
 
     public function estudianteproyecto() {
         $estudiantes = Estudiante::all();
+        if (!isset(Auth::user()->embajador)) {
+            abort(404);
+        }
+
         return view('embajador.estudiante-proyecto', compact('estudiantes'));
     }
 
-    public function guardarVideo(Request $request, Embajador $embajador) {
+    public function guardarVideo(Request $request) {
         // dd($request);
-        if (Auth::user()->id == 5) {
+        if (Auth::user()->rol_id == 5) {
+            $embajador = Auth::user()->embajador;
             $request->validate([
                 'pitch' => ['required', 'mimetypes:video/avi,video/mpeg,video/mp4,video/flv'],
                 'plan_negocios' => ['required'],
+                'nombre_proyecto' => ['required', 'string'],
+                'lider_proyecto' => ['required'],
             ]);
             
             $pitch =  Auth::user()->id . "_" .  $request['pitch']->getClientOriginalName();
@@ -36,7 +43,7 @@ class EmbajadorController extends Controller
             $embajador->plan_negocios = $plan_negocios;
             $embajador->lider_proyecto = $request['lider_proyecto'];
 
-
+            $embajador->save();
             
             // dd($pitch, $plan_negocios);
             return redirect()->route('embajadorProyecto')->with('info', 'Información registrada exitosamente');
