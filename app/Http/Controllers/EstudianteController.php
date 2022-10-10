@@ -9,6 +9,46 @@ use Illuminate\Support\Facades\Gate;
 
 class EstudianteController extends Controller
 {
+
+    public function estudianteproyecto() {
+        $estudiantes = Estudiante::all();
+        if (!isset(Auth::user()->embajador)) {
+            abort(404);
+        }
+
+        return view('embajador.estudiante-proyecto', compact('estudiantes'));
+    }
+
+    public function guardarVideo(Request $request) {
+        // dd($request);
+        $estudiante = Auth::user()->estudiante;
+        if (isset($estudiante)) {
+            $request->validate([
+                'pitch' => ['required', 'mimetypes:video/avi,video/mpeg,video/mp4,video/flv'],
+                'plan_negocios' => ['required'],
+                'nombre_proyecto' => ['required', 'string'],
+            ]);
+            
+            $pitch =  Auth::user()->id . "_" .  $request['pitch']->getClientOriginalName();
+            $plan_negocios = Auth::user()->id . "_" .  $request['plan_negocios']->getClientOriginalName();
+
+            $request['pitch']->move(public_path("pitch"), $pitch);
+            $request['plan_negocios']->move(public_path("plan de negocios"), $plan_negocios);
+
+            $estudiante->pitch = $pitch;
+            $estudiante->plan_negocios = $plan_negocios;
+            $estudiante->lider_proyecto = $request['lider_proyecto'];
+
+            $estudiante->save();
+            
+            // dd($pitch, $plan_negocios);
+            return redirect()->route('embajadorpProyecto')->with('info', 'Información registrada exitosamente');
+        } else {
+            abort(403);
+        }
+    }
+
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -32,7 +72,7 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        
+        $estudiante = Auth::user()->estudiante;
         return view('estudiante.estudiante-create', compact('estudiante'));
         
     }

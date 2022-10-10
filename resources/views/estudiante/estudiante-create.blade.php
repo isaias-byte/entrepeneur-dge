@@ -164,9 +164,6 @@
                             <option>Masculino</option>
                             <option>Femenino</option>
                         </select>
-                        {{-- <input type="text" id="sexo" name="sexo"
-                                class="form-control @error('sexo') is-invalid @enderror"
-                                value="{{ old('sexo') ?? ($estudiante->sexo ?? '') }}"> --}}
                         @error('sexo')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
@@ -192,12 +189,29 @@
                         @enderror
                     </div>
 
+                    @if (auth()->user()->rol->id == 1) 
+                        <div class="form-group">
+                            <label for="embajador">Embajador</label>
+                            <select id="embajador" name="embajador"
+                                class="form-control mb-3 @error('embajador') is-invalid @enderror"
+                                value="{{ old('embajador') ?? ($estudiante->sexo ?? '') }}">
+                                <option value="0">Estudiante</option>
+                                <option value="1">Embajador</option>
+                            </select>
+                            @error('sexo')
+                                <div class="text-danger"> {{ $message }} </div>
+                            @enderror
+                        </div>
+                    @endif
+
                     <button type="submit" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
                         <span class="text">Guardar</span>
                     </button>
+
+                    
 
                     </form>
                 </div>

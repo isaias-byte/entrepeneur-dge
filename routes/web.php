@@ -43,6 +43,8 @@ Route::get('estudiante/edit/{estudiante}', [EstudianteController::class, 'edit']
 Route::patch('estudiante/update/{estudiante}', [EstudianteController::class, 'update'])->name('estudiante.update');
 Route::delete('estudiante/destroy/{estudiante}', [EstudianteController::class, 'destroy'])->name('estudiante.destroy');
 Route::get('estudiante/mi-proyecto', [EstudianteController::class, 'estudianteproyecto'])->name('estudianteproyecto');
+Route::get('estudiante/mi-proyecto', [EstudianteController::class, 'estudianteproyecto'])->name('embajadorProyecto');
+Route::post('estudiante/guardar-proyecto', [EstudianteController::class, 'guardarVideo'])->name('embajador.guardarVideo');
 
 //*Rutas de administradores
 Route::get('administrador/estudiantes', [AdministradorController::class, 'adminEstudiantes'])->name('admin.estudiantes');
@@ -70,8 +72,7 @@ Route::get('embajador/show/{embajador}', [EmbajadorController::class, 'show'])->
 Route::get('embajador/edit/{embajador}', [EmbajadorController::class, 'edit'])->name('embajador.edit');
 Route::patch('embajador/update/{embajador}', [EmbajadorController::class, 'update'])->name('embajador.update');
 Route::delete('embajador/destroy/{embajador}', [EmbajadorController::class, 'destroy'])->name('embajador.destroy');
-Route::get('embajador/mi-proyecto', [EmbajadorController::class, 'estudianteproyecto'])->name('embajadorProyecto');
-Route::post('embajador/guardar-proyecto', [EmbajadorController::class, 'guardarVideo'])->name('embajador.guardarVideo');
+
 
 
 //*Rutas de jueces

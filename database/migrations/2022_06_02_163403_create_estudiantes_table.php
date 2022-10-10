@@ -16,7 +16,6 @@ class CreateEstudiantesTable extends Migration
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            // $table->foreignId('nrc_id')->constrained('users');>
             $table->string('nombre', 30);
             $table->string('apellido_paterno', 30);
             $table->string('apellido_materno', 30);
@@ -24,6 +23,12 @@ class CreateEstudiantesTable extends Migration
             $table->string('sexo');
             $table->string('codigo');
             $table->string('nrc');
+
+            $table->string("pitch", 100)->nullable();
+            $table->string("plan_negocios", 100)->nullable();
+            $table->string("embajador", 2)->default('0')->nullable();
+            $table->foreignId('profesor_id')->nullable()->constrained('profesors', 'id');
+
             $table->timestamps();
             $table->softDeletes();
         });
