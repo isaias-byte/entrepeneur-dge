@@ -12,7 +12,7 @@ class EstudianteController extends Controller
 
     public function estudianteproyecto() {
         $estudiantes = Estudiante::all();
-        if (!isset(Auth::user()->embajador)) {
+        if (!isset(Auth::user()->estudiante) && Auth::user()->estudiante->embajador != '1') {
             abort(404);
         }
 
@@ -22,30 +22,28 @@ class EstudianteController extends Controller
     public function guardarVideo(Request $request) {
         // dd($request);
         $estudiante = Auth::user()->estudiante;
-        if (isset($estudiante)) {
-            $request->validate([
-                'pitch' => ['required', 'mimetypes:video/avi,video/mpeg,video/mp4,video/flv'],
-                'plan_negocios' => ['required'],
-                'nombre_proyecto' => ['required', 'string'],
-            ]);
-            
-            $pitch =  Auth::user()->id . "_" .  $request['pitch']->getClientOriginalName();
-            $plan_negocios = Auth::user()->id . "_" .  $request['plan_negocios']->getClientOriginalName();
+        // dd($estudiante);
+        $request->validate([
+            'pitch' => ['required', 'mimetypes:video/avi,video/mpeg,video/mp4,video/flv'],
+            'plan_negocios' => ['required'],
+            'nombre_proyecto' => ['required', 'string'],
+        ]);
+        
+        $pitch =  Auth::user()->id . "_" .  $request['pitch']->getClientOriginalName();
+        $plan_negocios = Auth::user()->id . "_" .  $request['plan_negocios']->getClientOriginalName();
+        $nombre_proyecto = $request['nombre_proyecto'];
 
-            $request['pitch']->move(public_path("pitch"), $pitch);
-            $request['plan_negocios']->move(public_path("plan de negocios"), $plan_negocios);
+        $request['pitch']->move(public_path("pitch"), $pitch);
+        $request['plan_negocios']->move(public_path("plan de negocios"), $plan_negocios);
+        
 
-            $estudiante->pitch = $pitch;
-            $estudiante->plan_negocios = $plan_negocios;
-            $estudiante->lider_proyecto = $request['lider_proyecto'];
+        $estudiante->pitch = $pitch;
+        $estudiante->plan_negocios = $plan_negocios;
+        $estudiante->nombre_proyecto = $nombre_proyecto;
 
-            $estudiante->save();
-            
-            // dd($pitch, $plan_negocios);
-            return redirect()->route('embajadorpProyecto')->with('info', 'Información registrada exitosamente');
-        } else {
-            abort(403);
-        }
+        $estudiante->save();
+        
+        return redirect()->route('estudianteProyecto')->with('info', 'Información registrada exitosamente');
     }
 
 
@@ -102,7 +100,7 @@ class EstudianteController extends Controller
 
         Estudiante::create($request->all());
         
-        return redirect()->route('dashboard')->with('info', 'Información registrada exitosamente');
+        return redirect()->route('estudiante.create')->with('info', 'Información registrada exitosamente');
         // return $request->all();
     }
 

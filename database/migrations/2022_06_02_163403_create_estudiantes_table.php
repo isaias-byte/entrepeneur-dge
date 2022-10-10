@@ -27,6 +27,7 @@ class CreateEstudiantesTable extends Migration
             $table->string("pitch", 100)->nullable();
             $table->string("plan_negocios", 100)->nullable();
             $table->string("embajador", 2)->default('0')->nullable();
+            $table->string("nombre_proyecto", 100)->nullable();
             $table->foreignId('profesor_id')->nullable()->constrained('profesors', 'id');
 
             $table->timestamps();

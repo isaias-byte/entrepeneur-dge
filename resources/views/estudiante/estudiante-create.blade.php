@@ -194,11 +194,11 @@
                             <label for="embajador">Embajador</label>
                             <select id="embajador" name="embajador"
                                 class="form-control mb-3 @error('embajador') is-invalid @enderror"
-                                value="{{ old('embajador') ?? ($estudiante->sexo ?? '') }}">
+                                value="{{ old('embajador') ?? ($estudiante->embajador ?? '') }}">
                                 <option value="0">Estudiante</option>
                                 <option value="1">Embajador</option>
                             </select>
-                            @error('sexo')
+                            @error('embajador')
                                 <div class="text-danger"> {{ $message }} </div>
                             @enderror
                         </div>

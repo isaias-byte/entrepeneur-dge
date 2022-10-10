@@ -14,7 +14,7 @@
     </li>
     @if (auth()->user()->rol->id != 1)
         <hr class="sidebar-divider">
-        @if (auth()->user()->rol->id == 5)            
+        @if (auth()->user()->rol->id == 6 && auth()->user()->estudiante->embajador == '1')            
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('embajadorProyecto') }}" aria-expanded="true">
 
