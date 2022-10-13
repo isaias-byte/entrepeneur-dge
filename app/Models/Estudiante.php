@@ -10,7 +10,7 @@ class Estudiante extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['nombre', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento', 'sexo', 'codigo', 'nrc', 'pitch', 'plan_negocios', 'embajador', 'user_id',];
+    protected $fillable = ['nombre', 'apellido_paterno', 'apellido_materno', 'fecha_nacimiento', 'sexo', 'codigo', 'nrc', 'pitch', 'plan_negocios', 'embajador', 'user_id', 'profesor_id',];
 
     public function informacionCompleta(){
         if (Estudiante::class == true)
@@ -18,6 +18,7 @@ class Estudiante extends Model
         return false;
     }
     
+    // public function
 
     public function user()
     {

@@ -42,7 +42,6 @@ Route::get('estudiante/show/{estudiante}', [EstudianteController::class, 'show']
 Route::get('estudiante/edit/{estudiante}', [EstudianteController::class, 'edit'])->name('estudiante.edit');
 Route::patch('estudiante/update/{estudiante}', [EstudianteController::class, 'update'])->name('estudiante.update');
 Route::delete('estudiante/destroy/{estudiante}', [EstudianteController::class, 'destroy'])->name('estudiante.destroy');
-Route::get('estudiante/mi-proyecto', [EstudianteController::class, 'estudianteproyecto'])->name('estudianteproyecto');
 Route::get('estudiante/mi-proyecto', [EstudianteController::class, 'estudianteproyecto'])->name('embajadorProyecto');
 Route::post('estudiante/guardar-proyecto', [EstudianteController::class, 'guardarVideo'])->name('embajador.guardarVideo');
 
@@ -82,8 +81,6 @@ Route::get('juez/show/{juez}', [JuezController::class, 'show'])->name('juez.show
 Route::get('juez/edit/{juez}', [JuezController::class, 'edit'])->name('juez.edit');
 Route::patch('juez/update/{juez}', [JuezController::class, 'update'])->name('juez.update');
 Route::delete('juez/destroy/{juez}', [JuezController::class, 'destroy'])->name('juez.destroy');
-Route::get('juez/mi-proyecto', [JuezController::class, 'estudianteproyecto'])->name('estudianteProyecto');
-
 
 //*Ruta de usuarios
 Route::get('mi-cuenta', [UsersController::class, 'miCuenta'])->name('user.cuenta');

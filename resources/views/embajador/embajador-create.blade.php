@@ -155,7 +155,7 @@
                             <label for="profesor_id">Profesor</label>
                             <select class="form-control" id="profesor_id" name="profesor_id">
                                 @foreach ($profesores as $profe)
-                                        <option value="{{ $profe->id }}" aria-placeholder="Seleccione un profesor">{{ $profe->getNombreCompletoAttribute() }}</option>
+                                        <option value="{{ $profe->id }}" aria-placeholder="Seleccione un profesor" {{ array_search($estudiante->profesor->pluck('id')->toArray()) !== false ? 'selected' : ''}}>{{ $profe->getNombreCompletoAttribute() }}</option>
                             
                                     @endforeach
                             </select>

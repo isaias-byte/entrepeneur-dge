@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\Profesor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -43,7 +44,7 @@ class EstudianteController extends Controller
 
         $estudiante->save();
         
-        return redirect()->route('estudianteProyecto')->with('info', 'Información registrada exitosamente');
+        return redirect()->route('embajadorProyecto')->with('info', 'Información registrada exitosamente');
     }
 
 
@@ -71,7 +72,8 @@ class EstudianteController extends Controller
     public function create()
     {
         $estudiante = Auth::user()->estudiante;
-        return view('estudiante.estudiante-create', compact('estudiante'));
+        $profesores = Profesor::all();
+        return view('estudiante.estudiante-create', compact('estudiante', 'profesores'));
         
     }
 

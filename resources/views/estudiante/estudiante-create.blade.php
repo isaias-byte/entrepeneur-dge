@@ -204,6 +204,18 @@
                         </div>
                     @endif
 
+                    @if (auth()->user()->rol->id == 6 && auth()->user()->estudiante->embajador == '1')
+                        <div class="form-group">
+                            <label for="profesor_id">Profesor</label>
+                            <select class="form-control" id="profesor_id" name="profesor_id" selected>
+                                @foreach ($profesores as $profe)
+                                        <option value="{{ $profe->id }}" aria-placeholder="Seleccione un profesor" selected>{{ $profe->getNombreCompletoAttribute() }}</option>
+                            
+                                    @endforeach
+                            </select>
+                        </div>
+                    @endif
+
                     <button type="submit" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
