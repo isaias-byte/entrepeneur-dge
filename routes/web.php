@@ -51,6 +51,7 @@ Route::get('administrador/profesores', [AdministradorController::class, 'adminPr
 Route::get('administrador/embajadores', [AdministradorController::class, 'adminEmbajadores'])->name('admin.embajadores');
 Route::get('administrador/jueces', [AdministradorController::class, 'adminJueces'])->name('admin.jueces');
 Route::get('administrador/usuarios', [AdministradorController::class, 'adminUsuarios'])->name('adminUsuarios');
+Route::get('administrador/proyectos/antiguos', [AdministradorController::class, 'adminProyectosAnti'])->name('admin.proyectosanti');
 
 
 // Route::resource('profesor', ProfesorController::class)->middleware('verified');

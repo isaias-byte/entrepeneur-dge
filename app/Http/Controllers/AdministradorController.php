@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Gate;
 class AdministradorController extends Controller
 {
 
+    public function adminProyectosAnti() {
+        if (Gate::allows('admin-only', auth()->user())) {
+            return view('admin.admin-proyectosantig');
+        } else {
+            abort(403);
+        }
+    }
+
     public function adminUsuarios() {
         if (Gate::allows('admin-only', auth()->user()))
         {

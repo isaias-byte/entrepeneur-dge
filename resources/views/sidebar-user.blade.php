@@ -101,12 +101,15 @@
           </div>
       </div> --}}
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-history"></i>
-            <span>Plan de negocios históricos</span>
-        </a>
-    </li>
+    @if (auth()->user()->rol->id == 1)
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.proyectosanti') }}">
+                <i class="fas fa-history"></i>
+                <span>Plan de negocios históricos</span>
+            </a>
+        </li>
+    @endif
+    
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-target="#collapseTable" aria-expanded="true"
             aria-controls="collapseTable">
